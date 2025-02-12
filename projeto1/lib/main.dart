@@ -8,21 +8,35 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter App',
+      title: 'Página inicial',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      home: MainScreen(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class MainScreen extends StatefulWidget {
+  @override
+  _MainScreenState createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  int _selectedIndex = 0;
+  final List<Widget> _pages = [HomePage(), SecondPage(), ThirdPage()];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Página inicial')),
+      appBar: AppBar(title: Text('Aplicativo')),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -34,44 +48,49 @@ class HomePage extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.pageview),
               title: Text('Segunda página'),
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SecondPage()),
-              ),
+              onTap: () => _onItemTapped(1),
             ),
             ListTile(
               leading: Icon(Icons.star),
               title: Text('Terceira página'),
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ThirdPage()),
-              ),
+              onTap: () => _onItemTapped(2),
             ),
           ],
         ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Bem vindo(a) a pagina inicial!', style: TextStyle(fontSize: 20)),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SecondPage()),
-              ),
-              child: Text('Vá para segunda página'),
-            ),
-            ElevatedButton(
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ThirdPage()),
-              ),
-              child: Text('Vá para terceira página'),
-            ),
-          ],
-        ),
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Início',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.info),
+            label: 'Segunda',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.star),
+            label: 'Terceira',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.blue,
+        onTap: _onItemTapped,
+      ),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Bem-vindo(a) à página inicial!', style: TextStyle(fontSize: 20)),
+        ],
       ),
     );
   }
@@ -80,22 +99,14 @@ class HomePage extends StatelessWidget {
 class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Segunda página')),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Bem vindo(a) a segunda página!', style: TextStyle(fontSize: 20)),
-            SizedBox(height: 20),
-            Icon(Icons.info, size: 50, color: Colors.blue),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text('Voltar para o ínicio'),
-            ),
-          ],
-        ),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Bem-vindo(a) à segunda página!', style: TextStyle(fontSize: 20)),
+          SizedBox(height: 20),
+          Icon(Icons.info, size: 50, color: Colors.blue),
+        ],
       ),
     );
   }
@@ -104,22 +115,14 @@ class SecondPage extends StatelessWidget {
 class ThirdPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Terceira página')),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Explore a terceira página!', style: TextStyle(fontSize: 20)),
-            SizedBox(height: 20),
-            Icon(Icons.star, size: 50, color: Colors.yellow),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text('Voltar para o ínicio'),
-            ),
-          ],
-        ),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Explore a terceira página!', style: TextStyle(fontSize: 20)),
+          SizedBox(height: 20),
+          Icon(Icons.star, size: 50, color: Colors.yellow),
+        ],
       ),
     );
   }
