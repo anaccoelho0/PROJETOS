@@ -1,16 +1,3 @@
 # projeto1
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Basicamente pedi para a IA criar para mim três telas com a barra. Inicio, segunda tela, terceira tela. Antes, fiz em forma de botão sem a barra, achei que fosse intuitivo com a barra e assim eu fiz. Depois, adicionei o menu com três traços, adicionei símbolos com imagens.    
